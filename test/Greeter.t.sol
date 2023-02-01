@@ -3,40 +3,37 @@ pragma solidity ^0.8.17;
 
 import "forge-std/Test.sol";
 
-// import {Greeter} from "src/Greeter.sol";
+import {WETH10} from "src/WETH10.sol";
 
-contract GreeterTest is Test {
-    using stdStorage for StdStorage;
+contract Weth10Test is Test {
+    WETH10 public weth;
+    address owner;
+    address bob;
 
-    // Greeter greeter;
+    function setUp() public {
+        weth = new WETH10();
+        bob = makeAddr("bob");
 
-    // event GMEverybodyGM();
+        vm.deal(address(weth), 10 ether);
+        vm.deal(address(bob), 1 ether);
+        console2.log("addr", weth.data());
+        console2.log("addr two", weth.callData());
+        console2.log("test", weth.test(),weth.totalSupply());
+    }
 
-    // function setUp() external {
-    //     greeter = new Greeter("gm");
-    // }
+    function testHack() public {
+        assertEq(address(weth).balance, 10 ether, "weth contract should have 10 ether");
 
-    // // VM Cheatcodes can be found in ./lib/forge-std/src/Vm.sol
-    // // Or at https://github.com/foundry-rs/forge-std
-    // function testSetGm() external {
-    //     // slither-disable-next-line reentrancy-events,reentrancy-benign
-    //     greeter.setGreeting("gm gm");
 
-    //     // Expect the GMEverybodyGM event to be fired
-    //     vm.expectEmit(true, true, true, true);
-    //     emit GMEverybodyGM();
-    //     // slither-disable-next-line unused-return
-    //     greeter.gm("gm gm");
+        vm.startPrank(bob);
 
-    //     // Expect the gm() call to revert
-    //     vm.expectRevert(abi.encodeWithSignature("BadGm()"));
-    //     // slither-disable-next-line unused-return
-    //     greeter.gm("gm");
+        // hack time!
+        weth.withdraw(10 ether);
 
-    //     // We can read slots directly
-    //     uint256 slot = stdstore.target(address(greeter)).sig(greeter.owner.selector).find();
-    //     assertEq(slot, 1);
-    //     bytes32 owner = vm.load(address(greeter), bytes32(slot));
-    //     assertEq(address(this), address(uint160(uint256(owner))));
-    // }
+        vm.stopPrank();
+        console2.log("balance", address(weth).balance);
+
+        // assertEq(address(weth).balance, 0, "empty weth contract");
+        // assertEq(bob.balance, 11 ether, "player should end with 11 ether");
+    }
 }
