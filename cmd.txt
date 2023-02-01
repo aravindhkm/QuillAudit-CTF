@@ -1,0 +1,16 @@
+forge create --rpc-url bsctestnet \
+    --constructor-args 0x36Ee7371c5D0FA379428321b9d531a1cf0a5cAE6 0x36Ee7371c5D0FA379428321b9d531a1cf0a5cAE6 1000 0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd  \
+    --private-key 0x99748c4d7a2391052aade492dee9a4ff8b3810522aa9a862d207d29e7e7476c9 src/CBDExchange.sol:Exchange \
+    --etherscan-api-key 49YWW1UHJU6UGD7T5ZTSTNRZB7B4AK7CHC \
+    --verify
+    
+    
+    src/Greeter.sol
+
+forge create --rpc-url mumbai \
+    --private-key 0x99748c4d7a2391052aade492dee9a4ff8b3810522aa9a862d207d29e7e7476c9 src/Token.sol:MaticWETH \
+    --etherscan-api-key UEABPMZI1TJZJVTICZHTGQRRYY5D18YCU8 \
+    --verify
+    
+    
+    src/Greeter.sol

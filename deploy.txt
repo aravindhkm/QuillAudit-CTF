@@ -1,0 +1,21 @@
+
+
+//manager
+forge create --rpc-url bsctestnet \
+    --private-key 0x99748c4d7a2391052aade492dee9a4ff8b3810522aa9a862d207d29e7e7476c9 src/CBDManager.sol:CBDManager \
+    --etherscan-api-key 49YWW1UHJU6UGD7T5ZTSTNRZB7B4AK7CHC \
+    --verify
+
+// exchange
+forge create --rpc-url bsctestnet \
+    --constructor-args 0x36Ee7371c5D0FA379428321b9d531a1cf0a5cAE6 0x36Ee7371c5D0FA379428321b9d531a1cf0a5cAE6 1000 0x558b41F6a6079E2a1EE297dcBe5C206177743C9d 0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd  \
+    --private-key 0x99748c4d7a2391052aade492dee9a4ff8b3810522aa9a862d207d29e7e7476c9 src/CBDExchange.sol:CBDExchange \
+    --etherscan-api-key 49YWW1UHJU6UGD7T5ZTSTNRZB7B4AK7CHC \
+    --verify
+
+//factory
+forge create --rpc-url bsctestnet \
+    --constructor-args 0x558b41F6a6079E2a1EE297dcBe5C206177743C9d \
+    --private-key 0x99748c4d7a2391052aade492dee9a4ff8b3810522aa9a862d207d29e7e7476c9 src/CBDVentorFactory.sol:CBDVendorFactory \
+    --etherscan-api-key 49YWW1UHJU6UGD7T5ZTSTNRZB7B4AK7CHC \
+    --verify
