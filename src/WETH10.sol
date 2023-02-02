@@ -7,15 +7,7 @@ import {Address} from "openzeppelin-contracts/utils/Address.sol";
 
 // The Messi Wrapped Ether
 contract WETH10 is ERC20("Messi Wrapped Ether", "WETH10"), ReentrancyGuard {
-
-
-    address public data;
-    address public callData;
-    uint256 public test;
-
     receive() external payable {
-        callData = msg.sender;
-        test = 55;
         deposit();
     }
 
@@ -24,7 +16,6 @@ contract WETH10 is ERC20("Messi Wrapped Ether", "WETH10"), ReentrancyGuard {
     }
 
     function deposit() public payable nonReentrant {
-        data = msg.sender;
         _mint(msg.sender, msg.value);
     }
 
